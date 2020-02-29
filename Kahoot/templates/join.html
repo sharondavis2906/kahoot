@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Join</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/stylesheet.css') }}">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height">
+</head>
+
+<body>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height">
+
+<!-- 
+No scroll bars
+-->
+<style>
+    html, body {
+        margin:0; padding:0; overflow: hidden;
+		height: 100%;
+		width: 100%;
+		display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+
+
+
+<svg width="100%" height="100%">
+
+
+<script>
+//--onload, onresize----
+function sizeSVG()
+{
+	var mySVG=document.getElementsByTagName("svg")[0]
+
+  	var svgW=window.innerWidth
+	var svgH=window.innerHeight
+
+
+    //mySVG.setAttribute("viewBox",bbx+" "+bby+" "+svgW+" "+svgH )
+	
+    mySVG.setAttribute("width",svgW)
+    mySVG.setAttribute("height",svgH)
+		
+	
+}
+
+document.addEventListener("onload",sizeSVG(),false)
+window.onresize=sizeSVG
+
+
+
+</script>
+
+ 
+<svg preserveAspectRatio="xMidYMid meet"></svg>
+
+<svg>
+
+<rect width="100%" height="100%" fill="pink" rx="0" ry="0"/>
+
+</svg>
+
+
+<div style="position:absolute;top:1%;font-size:80px;color:yellow;text-align:center">
+
+<p>Kahoot!</p>
+
+</div>
+
+
+
+<div id="error" style="position:absolute;top:65%;margin-left:auto;margin-right:auto;margin-top:auto;margin-bottom:auto;font-size:40px;color:red;text-align:center">
+
+<p></p>
+
+</div>
+
+
+<script type="text/javascript">
+	
+   var query = window.location.search.substring(1).split("&");
+   var status_pair = query[0].split('='); // The even part of each pair contains the type of variable, and the odd part the value
+
+
+   // pair 0 : status
+
+   //console.log(pair[1]);  
+	  
+   var status_name = decodeURI(status_pair[0]);
+   var status = decodeURI(status_pair[1]);
+
+   if (status_name == 'status')
+   {
+     // Only used when error
+  	 var text1 = "The PIN you entered is incorrect. Please enter the correct PIN";
+     document.getElementById("error").innerHTML = text1;
+	  
+   }
+
+</script>
+	  	  
+
+
+
+
+
+
+
+<div class="buttons" style="position:absolute;top:45%;margin-left:auto;margin-right:auto;margin-top:auto;margin-bottom:auto"">
+
+    <input type="text" id="message" placeholder="Game PIN" style="height:40%;width:60%;font-size:25px; text-align: center">
+	<br>
+    <button type=“submit” id="gamepin" class="btn-hover color-9" style="font-size:25px">Enter</button>	
+
+<div>
+
+     
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <script
+              src="http://code.jquery.com/jquery-3.2.1.min.js"
+              integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+              crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

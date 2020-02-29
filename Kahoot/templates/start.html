@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Start</title>
+	<link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/stylesheet.css') }}">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height">
+
+	
+</head>
+
+<body>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height">
+
+<!-- 
+No scroll bars
+-->
+<style>
+
+
+
+    html, body {
+        margin:0; padding:0; overflow: hidden;
+		height: 100%;
+		width: 100%;
+		display: flex;
+        align-items: center;
+        justify-content: center;
+			
+    }
+	
+
+<!-- 
+
+#divid 
+{
+ 
+text-align: center;   
+ 
+height:100%;
+ 
+width: 100%;
+ 
+border: solid 1px black;
+ 
+background-color: yellow;
+ 
+padding: 10px;
+ 
+margin: 20px;
+ 
+}	
+
+-->
+
+	
+	
+</style>
+
+
+
+
+<svg width="100%" height="100%">
+
+
+<script>
+//--onload, onresize----
+function sizeSVG()
+{
+	var mySVG=document.getElementsByTagName("svg")[0]
+
+  	var svgW=window.innerWidth
+	var svgH=window.innerHeight
+
+	//console.log(bbw);
+
+    //mySVG.setAttribute("viewBox",0+" "+0+" "+svgW+" "+svgH )
+	
+    mySVG.setAttribute("width",svgW)
+    mySVG.setAttribute("height",svgH)
+		
+	
+}
+
+document.addEventListener("onload",sizeSVG(),false)
+window.onresize=sizeSVG
+
+
+
+</script>
+
+ 
+
+
+
+<svg>
+
+preserveAspectRatio="xMidYMid meet">
+
+<rect width="100%" height="100%" fill="green" rx="0" ry="0"/>
+
+<!-- 
+
+<text x="50%" y="10%" fill="yellow" font-family="'Verdana-Bold'" font-size="60px" dominant-baseline="middle" text-anchor="middle">
+Kahoot!
+</text>
+
+-->
+
+<rect width="100%" height="1%" y="70%" fill="black" rx="0" ry="0"/>
+
+<rect width="30%" height="7%" x="35%" y="67%" fill="black" rx="10px" ry="10px"/>
+
+
+</svg>
+
+
+<!-- 
+<div align="center" width="900px" height="900px" ; style="position:absolute;top:1%;margin-left:auto;margin-right:auto;margin-top:auto;margin-bottom:auto;font-size:60px;color:yellow;text-align:center">
+-->
+
+<div style="position:absolute;top:1%;font-size:80px;color:yellow;text-align:center">
+
+<p>Kahoot!</p>
+
+</div>
+
+
+
+
+<div id="selgame" style="position:absolute;top:25%;margin-left:auto;margin-right:auto;margin-top:auto;margin-bottom:auto;font-size:40px;color:yellow;text-align:center">
+
+<p>You have selected the game XXXX</p>
+
+</div>
+
+
+<div id="gamepin" style="position:absolute;top:35%;margin-left:auto;margin-right:auto;margin-top:auto;margin-bottom:auto;font-size:40px;color:yellow;text-align:center">
+
+<p>Players may join at http://127.0.0.1:5000/player using Game PIN XXXX</p>
+
+</div>
+
+
+<div id="players" style="position:absolute;top:68%;margin-left:auto;margin-right:auto;margin-top:auto;margin-bottom:auto;font-size:40px;color:yellow;text-align:center">
+
+<p>Waiting for players XXXX</p>
+
+</div>
+
+
+<div id="playerlist" style="position:absolute;top:80%;margin-left:auto;margin-right:auto;margin-top:auto;margin-bottom:auto;font-size:50px;color:yellow;text-align:center">
+
+<p></p>
+
+</div>
+
+
+
+<div class="buttons" style="position:absolute;top:45%;margin-left:auto;margin-right:auto;margin-top:auto;margin-bottom:auto">
+
+    
+	<button type=“submit” id="gamestart" class="btn-hover color-8" style="font-size:25px">Start Game</button>	
+    <br>
+    <button type=“submit” id="gameexit" class="btn-hover color-9" style="font-size:25px">Exit Game</button>	
+	
+</div>
+
+
+
+      <script type="text/javascript">
+	
+      var query = window.location.search.substring(1).split("&");
+      var game_pair = query[0].split('='); // The even part of each pair contains the type of variable, and the odd part the value
+      var players_pair = query[1].split('=');
+      var pin_pair = query[2].split('=');	  
+      var player1_pair = query[3].split('=');	
+      var player2_pair = query[4].split('=');	
+      var player3_pair = query[5].split('=');	
+      var player4_pair = query[6].split('=');	
+      var player5_pair = query[7].split('=');		  
+
+      // pair 0 : game, pair 1 : number of players, pair 2 : game PIN
+
+      //console.log(pair[1]);  
+	  
+	  var game = decodeURI(game_pair[1].replace('+',' '));
+	  var players = decodeURI(players_pair[1].replace('+',' '));
+	  var pin = decodeURI(pin_pair[1].replace('+',' '));
+	  var player1 = decodeURI(player1_pair[1].replace('+',' '));
+	  var player2 = decodeURI(player2_pair[1].replace('+',' '));
+	  var player3 = decodeURI(player3_pair[1].replace('+',' '));
+	  var player4 = decodeURI(player4_pair[1].replace('+',' '));
+	  var player5 = decodeURI(player5_pair[1].replace('+',' '));	  
+	  
+	  var text1 = "You have selected the game ";
+	  var text2 = text1.concat(game);
+
+      document.getElementById("selgame").innerHTML = text2;
+
+	  var text3 = "Players may join at http://127.0.0.1:5000/join using Game PIN ";	  
+	  var text4 = text3.concat(pin);	  
+
+      document.getElementById("gamepin").innerHTML = text4;
+
+      // Display number of players
+
+      if (players > 0)
+	  {
+        var text5 = "Players joined: ".concat(players);
+		document.getElementById("gamestart").disabled = false;
+      }
+	  else
+	  {
+	    document.getElementById("gamestart").disabled = true;
+	    var text5 = "Waiting for players to join..."
+	  }
+
+      document.getElementById("players").innerHTML = text5;
+
+      // Display player names
+
+      var pnames="";
+
+      if (players == 1)
+	  {
+	     pnames = player1;
+	  }
+	  else if (players == 2)
+	  {
+	     
+		 pnames = player1 + '\xa0\xa0\xa0\xa0\xa0\xa0\xa0' + player2;
+		 
+		 
+		
+	  }
+	  else
+	  {
+	    
+	  
+	  }
+
+      document.getElementById("playerlist").innerHTML = pnames;
+
+
+      </script>
+	  	  
+
+
+
+
+
+
+
+
+     
+
+	 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <script
+              src="http://code.jquery.com/jquery-3.2.1.min.js"
+              integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+              crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
