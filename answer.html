@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Player</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/stylesheet.css') }}">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height">
+</head>
+
+<body>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height">
+
+<!-- 
+No scroll bars
+-->
+<style>
+    html, body {
+        margin:0; padding:0; overflow: hidden;
+		height: 100%;
+		width: 100%;
+		display: flex;
+		
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+
+
+
+<svg width="100%" height="100%">
+
+
+<script>
+//--onload, onresize----
+function sizeSVG()
+{
+	var mySVG=document.getElementsByTagName("svg")[0]
+
+  	var svgW=window.innerWidth
+	var svgH=window.innerHeight
+
+
+    //mySVG.setAttribute("viewBox",bbx+" "+bby+" "+svgW+" "+svgH )
+	
+    mySVG.setAttribute("width",svgW)
+    mySVG.setAttribute("height",svgH)
+		
+	
+}
+
+document.addEventListener("onload",sizeSVG(),false)
+window.onresize=sizeSVG
+
+
+
+</script>
+
+ 
+<svg preserveAspectRatio="xMidYMid meet"></svg>
+
+<svg>
+
+<g>
+  <rect x="0%" y="0%" width="100%" height="100%" fill="silver" rx="0" ry="0"/>
+   <text id="kahoot" dominant-baseline="middle" alignment-baseline="central" text-anchor="middle"; font-size="80px"; font-style="italic"; font-family="times new roman"; font-weight="bold"; fill="yellow">Kahoot!</text> 
+</g>
+
+
+<g>
+<rect id="toprow" x="0%" fill="white" rx="0px" ry="0px"/>
+<text id="gametext" dominant-baseline="middle" alignment-baseline="central" text-anchor="middle"; font-size="40px"; font-style="normal"; font-family="times new roman"; font-weight="bold"; fill="black"></text>
+<text id="pintext" dominant-baseline="middle" alignment-baseline="central" text-anchor="middle"; font-size="40px"; font-style="normal"; font-family="times new roman"; font-weight="bold"; fill="black"></text>
+<text id="questiontext" dominant-baseline="middle" alignment-baseline="central" text-anchor="middle"; font-size="40px"; font-style="normal"; font-family="times new roman"; font-weight="bold"; fill="black"></text>
+</g>
+
+<g>
+<rect id="bottomrow" x="0%" fill="white" rx="0px" ry="0px"/>
+<text id="playertext" dominant-baseline="middle" alignment-baseline="central" text-anchor="middle"; font-size="40px"; font-style="normal"; font-family="times new roman"; font-weight="bold"; fill="black"></text>
+<text id="score" dominant-baseline="middle" alignment-baseline="central" text-anchor="middle"; font-size="40px"; font-style="normal"; font-family="times new roman"; font-weight="bold"; fill="black">0</text>
+</g>
+
+
+</svg>
+
+
+
+
+
+<script type="text/javascript">
+	
+   var query = window.location.search.substring(1).split("&");
+
+
+   var game_pair = query[0].split('='); // The even part of each pair contains the type of variable, and the odd part the value
+   var pin_pair = query[1].split('=');	  
+   var player_pair = query[2].split('=');	  
+   var numquestion_pair = query[3].split('=');	  // Number of questions in the game
+
+   // pair 0 : status
+
+   //console.log(pair[1]);  
+	  
+   var game = decodeURI(game_pair[1].replace('+',' '));
+   var pin = decodeURI(pin_pair[1].replace('+',' '));
+   var player = decodeURI(player_pair[1].replace('+',' '));
+   var numquestion = decodeURI(numquestion_pair[1].replace('+',' '));
+
+
+   //var text1 = game + '\xa0\xa0\xa0\xa0\xa0\xa0\xa0' + " PIN: " + pin; // xa0 is used for spaces (multiple spaces don't work!)
+     
+  	 
+  
+   
+   
+   
+   
+var kah = document.getElementById("kahoot");
+kah.setAttribute('x',window.innerWidth/2);
+kah.setAttribute('y',window.innerHeight*(6/100));
+   
+var toprow = 20;
+
+var tr = document.getElementById("toprow");
+tr.setAttribute('x',0);
+tr.setAttribute('y',window.innerHeight*(toprow/100));
+tr.setAttribute('height',window.innerHeight*(7/100));
+
+var gt = document.getElementById("gametext");
+gt.setAttribute('x',window.innerWidth/4);
+gt.setAttribute('y',window.innerHeight*((toprow+3.5)/100));
+
+document.getElementById("gametext").textContent = game;
+
+
+
+var pt = document.getElementById("pintext");
+pt.setAttribute('x',window.innerWidth/2);
+pt.setAttribute('y',window.innerHeight*((toprow+3.5)/100));
+
+document.getElementById("pintext").textContent = pin;
+
+
+var qr = document.getElementById("questiontext");
+qt.setAttribute('x',window.innerWidth/2);
+qt.setAttribute('y',window.innerHeight*((toprow+3.5)/100));
+
+var text1 = "1 of " + numquestion;
+
+document.getElementById("questiontext").textContent = text1;
+
+var botrow = 92;
+
+var br = document.getElementById("bottomrow");
+br.setAttribute('x',0);
+br.setAttribute('y',window.innerHeight*(botrow/100));
+br.setAttribute('height',window.innerHeight*(7/100));
+
+
+
+
+
+</script>
+	  	  
+
+
+<!-- 
+
+<div class="buttonsb" style="position:absolute;top:30%">
+
+
+    <button type=“submit” id="answer-red" class="btnb-hover color-1" style="font-size:30px"></button>	
+    <button type=“submit” id="answer-blue" class="btnb-hover color-2" style="font-size:30px"></button>
+    <br>	
+    <button type=“submit” id="answer-orange" class="btnb-hover color-3" style="font-size:30px"></button>	
+    <button type=“submit” id="answer-green" class="btnb-hover color-4" style="font-size:30px"></button>	   
+   
+   
+   
+<div>
+
+-->
+
+
+
+
+<div style="position:fixed">
+
+    <button type=“submit” id="answer-red" class="btn-hover color-1" style="font-size:30px;position:fixed"></button>	
+
+<div>
+
+
+<div style="position:fixed">
+
+    <button type=“submit” id="answer-blue" class="btn-hover color-2" style="font-size:30px;position:fixed"></button>	
+
+<div>
+
+
+<div style="position:fixed">
+
+    <button type=“submit” id="answer-orange" class="btn-hover color-3" style="font-size:30px;position:fixed"></button>	
+
+<div>
+
+
+<div style="position:fixed">
+
+    <button type=“submit” id="answer-green" class="btn-hover color-4" style="font-size:30px;position:fixed"></button>	
+
+<div>
+
+
+
+
+
+
+<script>
+
+
+
+var button_width = window.innerWidth/2 - 10;
+var button_width_px = button_width + "px";
+
+var button_height = window.innerHeight/3;
+var button_height_px = button_height + "px"; 
+
+
+var button_red_y = window.innerHeight*(3/4);
+var button_red_y_px = button_red_y + "px";
+
+console.log(button_red_y_px);
+
+document.getElementById("answer-red").style.width = button_width_px;
+document.getElementById("answer-red").style.height = button_height_px;
+
+document.getElementById("answer-blue").style.width = button_width_px;
+document.getElementById("answer-blue").style.height = button_height_px;
+
+document.getElementById("answer-orange").style.width = button_width_px;
+document.getElementById("answer-orange").style.height = button_height_px;
+
+document.getElementById("answer-green").style.width = button_width_px;
+document.getElementById("answer-green").style.height = button_height_px;
+
+
+//document.getElementById("answer-red").style.left = "10px";
+//document.getElementById("answer-red").style.top = button_red_y_px;
+
+
+	var but1_top = window.innerHeight/3;
+	var but1_left = window.innerWidth*(2/100);	
+	var but1_top_px = but1_top + "px";
+	var but1_left_px = but1_left + "px";
+	
+	var but2_top = but1_top;
+	var but2_left = window.innerWidth - but1_left;	
+	var but2_top_px = but2_top + "px";
+	var but2_left_px = but2_left + "px";	
+	
+	var but3_top = but2_top + but_height*3/2;
+	var but3_left = but1_left;	
+	var but3_top_px = but3_top + "px";
+	var but3_left_px = but3_left + "px";		
+	
+	var but4_top = but3_top;
+	var but4_left = but2_left;	
+	var but4_top_px = but4_top + "px";
+	var but4_left_px = but4_left + "px";			
+	
+		
+	document.getElementById("answer-red").style.top = but1_top_px;
+	document.getElementById("answer-red").style.left = but1_left_px;
+
+	document.getElementById("answer-blue").style.top = but2_top_px;
+	document.getElementById("answer-blue").style.left = but2_left_px;
+	
+	document.getElementById("answer-orange").style.top = but3_top_px;
+	document.getElementById("answer-orange").style.left = but3_left_px;
+
+	document.getElementById("answer-green").style.top = but4_top_px;
+	document.getElementById("answer-green").style.left = but4_left_px;	
+
+
+
+
+
+</script>
+
+
+     
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <script
+              src="http://code.jquery.com/jquery-3.2.1.min.js"
+              integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+              crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

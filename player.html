@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Player</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/stylesheet.css') }}">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height">
+</head>
+
+<body>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height">
+
+<!-- 
+No scroll bars
+-->
+<style>
+    html, body {
+        margin:0; padding:0; overflow: hidden;
+		height: 100%;
+		width: 100%;
+		display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+
+
+
+<svg width="100%" height="100%">
+
+
+<script>
+//--onload, onresize----
+function sizeSVG()
+{
+	var mySVG=document.getElementsByTagName("svg")[0]
+
+  	var svgW=window.innerWidth
+	var svgH=window.innerHeight
+
+
+    //mySVG.setAttribute("viewBox",bbx+" "+bby+" "+svgW+" "+svgH )
+	
+    mySVG.setAttribute("width",svgW)
+    mySVG.setAttribute("height",svgH)
+		
+	
+}
+
+document.addEventListener("onload",sizeSVG(),false)
+window.onresize=sizeSVG
+
+
+
+</script>
+
+ 
+<svg preserveAspectRatio="xMidYMid meet"></svg>
+
+<svg>
+
+<g>
+<rect id="mainrect" width="100%" height="100%" fill="pink" rx="0" ry="0"/>
+<text id="kahoot" dominant-baseline="middle" alignment-baseline="central" text-anchor="middle"; font-size="80px"; font-style="italic"; font-family="times new roman"; font-weight="bold"; fill="yellow">Kahoot!</text>
+<text id="error" dominant-baseline="middle" alignment-baseline="central" text-anchor="middle"; font-size="40px"; font-style="italic"; font-family="times new roman"; font-weight="bold"; fill="red"></text>
+<text id="wait" dominant-baseline="middle" alignment-baseline="central" text-anchor="middle"; font-size="40px"; font-style="normal"; font-family="times new roman"; font-weight="bold"; fill="black"></text>  
+</g>
+
+</svg>
+
+
+
+<!-- 
+Enter Game PIN page
+-->
+
+<div style="position:fixed">
+
+    <input type="text" id="messagepin" placeholder="Game PIN" style="font-size:25px; text-align: center;position:fixed">
+
+<div>
+
+
+<div style="position:fixed">
+
+    <button type=“submit” id="gamepin" class="btn-hover color-9" style="font-size:25px;position:fixed">Enter</button>	
+
+<div>
+
+
+<!-- 
+Enter Nickname page
+-->
+
+<div style="position:fixed">
+
+    <input type="text" id="messagenn" placeholder="Nickname" style="font-size:25px; text-align: center;position:fixed">
+
+<div>
+
+
+<div style="position:fixed">
+
+    <button type=“submit” id="nickname" class="btn-hover color-8" style="font-size:25px;position:fixed">OK, go!</button>	
+
+<div>
+
+
+
+<!-- 
+Answer page
+-->
+
+
+
+
+
+
+<script type="text/javascript">
+
+
+	var kah = document.getElementById("kahoot");
+    kah.setAttribute('x',window.innerWidth/2);
+    kah.setAttribute('y',window.innerHeight*(6/100));
+	
+
+
+    var mpin_width = window.innerWidth/6;
+    var mpin_width_px = mpin_width + "px";
+
+    var gpin_width = window.innerWidth/6;
+    var gpin_width_px = gpin_width + "px";
+
+
+    var mpin_height = window.innerHeight/20;
+    var mpin_height_px = mpin_height + "px"; 
+
+    var gpin_height = window.innerHeight/16;
+    var gpin_height_px = gpin_height + "px"; 
+	
+	
+	var mpin_top = window.innerHeight/2;
+	var mpin_left = window.innerWidth/2 - mpin_width/2;	
+	var mpin_top_px = mpin_top + "px";
+	var mpin_left_px = mpin_left + "px";
+	
+	var gpin_top = window.innerHeight/2 + mpin_height*3/2;
+	var gpin_left = window.innerWidth/2 - gpin_width/2;	
+	var gpin_top_px = gpin_top + "px";
+	var gpin_left_px = gpin_left + "px";	
+	
+	
+	
+	
+	document.getElementById("messagepin").style.width = mpin_width_px;
+	document.getElementById("messagepin").style.height = mpin_height_px;	
+	document.getElementById("messagepin").style.top = mpin_top_px;
+	document.getElementById("messagepin").style.left = mpin_left_px;
+	
+	document.getElementById("gamepin").style.width = gpin_width_px;
+	document.getElementById("gamepin").style.height = gpin_height_px;	
+	document.getElementById("gamepin").style.top = gpin_top_px;
+	document.getElementById("gamepin").style.left = gpin_left_px;	
+	
+
+	document.getElementById("messagenn").style.width = mpin_width_px;
+	document.getElementById("messagenn").style.height = mpin_height_px;	
+	document.getElementById("messagenn").style.top = mpin_top_px;
+	document.getElementById("messagenn").style.left = mpin_left_px;
+	
+	document.getElementById("nickname").style.width = gpin_width_px;
+	document.getElementById("nickname").style.height = gpin_height_px;	
+	document.getElementById("nickname").style.top = gpin_top_px;
+	document.getElementById("nickname").style.left = gpin_left_px;	
+
+
+	console.log(444);
+	console.log(mpin_height);
+
+	
+	// Disable "Nickname" during "PIN"
+	document.getElementById("messagenn").disabled = true;
+    document.getElementById("nickname").disabled = true;
+	
+	//document.getElementById("messagenn").hidden = true;
+    //document.getElementById("nickname").hidden = true;	
+	
+    document.getElementById("messagenn").style.display = "none"; // Hide
+    document.getElementById("nickname").style.display = "none";
+		
+	
+	var err = document.getElementById("error");
+    err.setAttribute('x',window.innerWidth/2);
+    err.setAttribute('y',window.innerHeight*(25/100));
+	
+	
+var wt = document.getElementById("wait");
+wt.setAttribute('x',window.innerWidth/2);
+wt.setAttribute('y',window.innerHeight*((35)/100));	
+	
+
+// ----------------------------------------------------------------------------------------------------
+// Answer
+
+
+
+
+
+
+
+
+
+// ----------------------------------------------------------------------------------------------------
+
+function update_player (mode)
+{
+  // 
+  
+  console.log(767);
+  console.log(mode);
+  
+  if (mode == "badpin")
+  { 
+     document.getElementById("error").textContent = "The PIN you entered is incorrect. Please enter the correct PIN";  
+  }
+  else if (mode == "pinok")
+  {
+    // PIN OK 
+	
+	console.log(999);
+
+	
+    document.getElementById("messagenn").disabled = false;
+    document.getElementById("nickname").disabled = false;
+    document.getElementById("messagepin").disabled = true;
+    document.getElementById("gamepin").disabled = true;
+
+    //document.getElementById("messagenn").hidden = false;
+    //document.getElementById("nickname").hidden = false;
+    //document.getElementById("messagepin").hidden = true;
+    //document.getElementById("gamepin").hidden = true;
+
+
+    document.getElementById("messagenn").style.display = "block"; // Display
+    document.getElementById("nickname").style.display = "block";
+	document.getElementById("messagepin").style.display = "none"; // Hide
+	document.getElementById("gamepin").style.display = "none";
+
+
+
+
+    document.getElementById("error").textContent = "";
+
+    document.getElementById("mainrect").style.fill = "lightgreen";
+
+  }
+  else if (mode == "badname")
+  {
+    document.getElementById("error").textContent = "Please enter a valid nickname";
+  }
+  else if (mode == "nameok")
+  {
+     
+	console.log(888);
+	 
+	document.getElementById("messagenn").disabled = true;
+    document.getElementById("nickname").disabled = true;
+	
+    //document.getElementById("messagenn").hidden = true;
+    //document.getElementById("nickname").hidden = true;	 
+	 
+    document.getElementById("messagenn").style.display = "none"; 
+    document.getElementById("nickname").style.display = "none";
+
+
+
+
+	 
+    document.getElementById("error").textContent = "";
+    document.getElementById("mainrect").style.fill = "orange";
+  
+    document.getElementById("wait").textContent = "Waiting for host to start the game...";  
+    	   
+  }
+
+} // update_player
+
+
+
+
+</script>
+	  	  
+
+
+
+
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <script
+              src="http://code.jquery.com/jquery-3.2.1.min.js"
+              integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+              crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
